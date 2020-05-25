@@ -32,4 +32,11 @@ public class SplashActivity extends BaseActivity {
             }
         },2000);
     }
+
+
+//백버튼 눌러도 앱 안꺼지게
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+    }
 }
