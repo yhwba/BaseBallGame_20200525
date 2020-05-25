@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,24 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void setupEvents() {
+        binding.sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                전송버튼 누르면 => 타이핑된 값을 받아오기
+                String inputValues = binding.numEdt.getText().toString();
 
+//                새로운 메세지로 등록
+                messages.add(new Message(inputValues, "Me"));
+
+//                리스트뷰의 내용물에 변화 발생
+                messageAdapter.notifyDataSetChanged();
+
+//                리스트뷰를 맨 밑으로 끌어 내여주자.
+                binding.messageListView.smoothScrollToPosition(messages.size()-1);
+
+
+            }
+        });
     }
 
     @Override
@@ -88,7 +106,7 @@ public class MainActivity extends BaseActivity {
 
         messages.add(new Message("세 자리 숫자를 입력하세요.","Cpu"));
 
-        messages.add(new Message("1 ~ 9 까지의 숫자를 중복없이 입력바랍니다.","Cpu"));
+        messages.add(new Message("1 ~ 9 만 출제되며, 중복은 없습니다..","Cpu"));
 
 //         어댑터가 사용하는 List의 내용변경 (메세지 추가)이 생겼으니 새로고침
         messageAdapter.notifyDataSetChanged();
