@@ -86,6 +86,10 @@ public class MainActivity extends BaseActivity {
 
         messages.add(new Message("야구게임에오신걸 환영합니다.","Cpu"));
 
+        messages.add(new Message("세 자리 숫자를 입력하세요.","Cpu"));
+
+        messages.add(new Message("1 ~ 9 까지의 숫자를 중복없이 입력바랍니다.","Cpu"));
+
 //         어댑터가 사용하는 List의 내용변경 (메세지 추가)이 생겼으니 새로고침
         messageAdapter.notifyDataSetChanged();
 
