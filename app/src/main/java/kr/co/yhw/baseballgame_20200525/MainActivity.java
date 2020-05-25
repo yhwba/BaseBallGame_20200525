@@ -60,7 +60,7 @@ public class MainActivity extends BaseActivity {
 //                리스트뷰를 맨 밑으로 끌어 내려주자.
                 binding.messageListView.smoothScrollToPosition(messages.size()-1);
 
-//               몇스트라이크 몇볼인지 계산하고 답장하자
+//              ?스트라이크 ?볼인지 계산하고 답장하자
                 checkStrikeAndBalls(inputValues);
 
 
@@ -130,6 +130,34 @@ public class MainActivity extends BaseActivity {
 
 //        String => int 변경 => int [] 3자리로 변경
         int inputNum = Integer.parseInt(inputVal);
+
+        int[] myNumbers = new int[3];
+
+//        100의자리 / 10의 자리 / 1의 자리 얻어내기
+        myNumbers[0] = inputNum /100;
+        myNumbers[1] = inputNum /10 % 10;
+        myNumbers[2] = inputNum % 10;
+
+        int strikeCount = 0;
+        int ballCount = 0;
+//        myNumbers와 questionArr 간의 비교
+        for ( int i =0; i < myNumbers.length; i++){
+
+            for (int j = 0; j < questionArr.length; j++){
+//                같은 숫자 발견 => S/B이 될 가능성이 있다
+                if (myNumbers[i] == questionArr[j]){
+
+//                    index가 같으니 strike
+                    if( i == j){
+                        strikeCount++;
+                    }
+//                    숫자는 같지만 index가 다르니 ball발견
+                    else {
+                        ballCount++;
+                    }
+                }
+            }
+        }
 
 
 
