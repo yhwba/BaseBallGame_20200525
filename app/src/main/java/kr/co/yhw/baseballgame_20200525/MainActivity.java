@@ -70,6 +70,9 @@ public class MainActivity extends BaseActivity {
 //              ?스트라이크 ?볼인지 계산하고 답장하자
                 checkStrikeAndBalls(inputValues);
 
+//                입력칸 내용 초기화
+                binding.numEdt.setText("");
+
 
             }
         });
