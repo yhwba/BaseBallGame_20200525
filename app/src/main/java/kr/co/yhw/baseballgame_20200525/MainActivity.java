@@ -6,7 +6,12 @@ import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import kr.co.yhw.baseballgame_20200525.adapters.MessageAdapter;
 import kr.co.yhw.baseballgame_20200525.databinding.ActivityMainBinding;
+import kr.co.yhw.baseballgame_20200525.datas.Message;
 
 public class MainActivity extends BaseActivity {
 
@@ -14,6 +19,12 @@ public class MainActivity extends BaseActivity {
 
 //    문제로 사용될 세자리 숫자 배열
     int[] questionArr= new int[3];
+
+//     채팅내역으로 사용할 ArrayList
+    List<Message> messages = new ArrayList<>();
+
+//    af
+    MessageAdapter messageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +41,14 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void setVaules() {
+
+        messageAdapter =new MessageAdapter(mContext,R.layout.message_list_item,messages);
+        binding.messageListView.setAdapter(messageAdapter);
         makeQusetion();
     }
 
 //    문제로 나올 3자리 숫자를 입력
-    void makeQusetion() {
+    void makeQusetion(){
 //        3자리 숫자를 채우기 위한 for문
         for (int i = 0;  i< questionArr.length; i++){
 //            각 자리에 올바른 숫자가 들어갈때까지 무한 반복
@@ -64,7 +78,16 @@ public class MainActivity extends BaseActivity {
         }
         for (int num : questionArr){
             Log.d("문제숫자",num+"");
+
+
         }
+
+        //컴퓨터가 사람한테 환영메세지
+
+        messages.add(new Message("야구게임에오신걸 환영합니다.","Cpu"));
+
+//         어댑터가 사용하는 List의 내용변경 (메세지 추가)이 생겼으니 새로고침
+        messageAdapter.notifyDataSetChanged();
 
 
 

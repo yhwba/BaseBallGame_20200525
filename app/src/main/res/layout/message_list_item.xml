@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <FrameLayout
+        android:id="@+id/myMessageLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         
@@ -27,6 +28,7 @@
 
     </FrameLayout>
     <FrameLayout
+        android:id="@+id/cpuMessageLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
