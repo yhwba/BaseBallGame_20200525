@@ -23,6 +23,9 @@ public class MainActivity extends BaseActivity {
 //    문제로 사용될 세자리 숫자 배열
     int[] questionArr= new int[3];
 
+//    정답을 입력 시도 횟수
+    int tryCount =0;
+
 //     채팅내역으로 사용할 ArrayList
     List<Message> messages = new ArrayList<>();
 
@@ -59,6 +62,9 @@ public class MainActivity extends BaseActivity {
 
 //                리스트뷰를 맨 밑으로 끌어 내려주자.
                 binding.messageListView.smoothScrollToPosition(messages.size()-1);
+
+//                올바르게 입력했으니 횟수를 증가 처리.
+                tryCount++;
 
 //              ?스트라이크 ?볼인지 계산하고 답장하자
                 checkStrikeAndBalls(inputValues);
@@ -164,6 +170,22 @@ public class MainActivity extends BaseActivity {
 
         messageAdapter.notifyDataSetChanged();
         binding.messageListView.smoothScrollToPosition(messages.size()-1);
+
+//        3S 라면 축하메세지 + 몇번만에 맞췄는지 + 입력 불가하도록 막아주기
+        if( strikeCount ==3 ){
+            messages.add(new Message("정답입니다","Cpu"));
+            messages.add(new Message(String.format("%d회만에 맞췄습니다",tryCount ),"Cpu"));
+            messageAdapter.notifyDataSetChanged();
+            binding.messageListView.smoothScrollToPosition(messages.size()-1);
+
+//            EditText와 button을 더이상 사용하지 못하도록 막아주는 코드
+            binding.numEdt.setEnabled(false);
+            binding.sendBtn.setEnabled(false);
+
+//            종료 메세지
+            Toast.makeText(mContext, "이용해주셔서 감사합니다아~", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 }
