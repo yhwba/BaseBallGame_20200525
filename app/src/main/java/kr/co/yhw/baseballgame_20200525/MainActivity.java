@@ -3,9 +3,11 @@ package kr.co.yhw.baseballgame_20200525;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,14 +45,23 @@ public class MainActivity extends BaseActivity {
 //                전송버튼 누르면 => 타이핑된 값을 받아오기
                 String inputValues = binding.numEdt.getText().toString();
 
+//                3자리가 아니면 등록 거부
+                if (inputValues.length() !=3){
+                    Toast.makeText(mContext, "세 자리 숫자로 입력바랍니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 //                새로운 메세지로 등록
                 messages.add(new Message(inputValues, "Me"));
 
 //                리스트뷰의 내용물에 변화 발생
                 messageAdapter.notifyDataSetChanged();
 
-//                리스트뷰를 맨 밑으로 끌어 내여주자.
+//                리스트뷰를 맨 밑으로 끌어 내려주자.
                 binding.messageListView.smoothScrollToPosition(messages.size()-1);
+
+//               몇스트라이크 몇볼인지 계산하고 답장하자
+                checkStrikeAndBalls(inputValues);
 
 
             }
@@ -115,5 +126,12 @@ public class MainActivity extends BaseActivity {
 
 
     }
+    void checkStrikeAndBalls(String inputVal){
 
+//        String => int 변경 => int [] 3자리로 변경
+        int inputNum = Integer.parseInt(inputVal);
+
+
+
+    }
 }
